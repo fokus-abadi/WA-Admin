@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mengalihkan...</title>
+    <script type="text/javascript">
+        // --- PENGATURAN ---
+        // Masukkan semua link WhatsApp Anda di bawah ini,
+        // pisahkan dengan koma.
+        const wa_links = [
+            "https://wa.me/6281412253024?text=Halo%20Cici",
+            "https://wa.me/62895422233668?text=Halo%20Rasyid",
+            "https://wa.me/62895701802626?text=Halo%20Surya",
+            "https://wa.me/628815075730?text=Halo%20Febri",
+            "https://wa.me/6282137373901?text=Halo%20Zacky"
+        ];
+        // --- AKHIR PENGATURAN ---
+
+        // Kode di bawah ini jangan diubah
+        function redirectToWhatsAppSequentially() {
+            // Dapatkan indeks terakhir yang digunakan dari penyimpanan browser.
+            // Jika belum ada, nilainya akan menjadi -1.
+            let lastIndex = parseInt(localStorage.getItem('last_wa_index') || '-1');
+
+            // Tentukan indeks berikutnya. Operator modulo (%) memastikan alur kembali ke 0
+            // setelah mencapai link terakhir, menciptakan perputaran (round-robin).
+            const nextIndex = (lastIndex + 1) % wa_links.length;
+
+            // Simpan indeks yang baru saja digunakan untuk kunjungan selanjutnya.
+            localStorage.setItem('last_wa_index', nextIndex);
+
+            // Ambil link yang sesuai dengan urutan.
+            const sequentialLink = wa_links[nextIndex];
+
+            // Alihkan pengguna ke link tersebut.
+            window.location.href = sequentialLink;
+        }
+
+        // Jalankan fungsi redirect saat halaman dimuat
+        redirectToWhatsAppSequentially();
+    </script>
+</head>
+<body>
+    <p>Sedang mengalihkan Anda ke WhatsApp Customer Service kami...</p>
+</body>
+</html>
